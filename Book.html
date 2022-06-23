@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="jquery-3.5.1.min.js"></script>
+
+    <form>
+        <form action="read" method="get"></form>
+
+            <label for="Bookid"> Book Id</label>
+
+            <input type="text" id="B1">
+    <!-- <input type="submit"> -->
+            <br> <br>
+            <label for="book name">Book name</label>
+            <input type="text"id="B2">
+            <br> <br>
+            <label for="price"> Price</label>
+    <input type="text" id="p1">
+    <br> <br>
+    <button id ="btn"> update Book</button>
+    </form>
+
+<script>
+
+    $('#btn').click(function(){
+       let ip={bookid: $('#B1').val(),
+        bookname:$('#B2').val(),
+        price:$('#p1').val()};
+
+        $.ajax({
+            data:ip,
+            url:"http://localhost:8081/update",
+            type:'post',
+            dataType:'json',
+            success:(data)=>{
+                console.log("Data given by server" + data)
+                if (data.status==true) {
+                    alert("Book udated")
+                } else {
+                    alert("Book not updated")
+                }
+            },
+            error:(error)=>{
+                alert("failed to conect server")
+            }
+        });
+    })
+</script>
+
+</body>
+</html>
